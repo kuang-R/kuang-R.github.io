@@ -37,8 +37,8 @@ pacman 其实是arch项目的软件包管理工具，与arch通用
 
 {% highlight sh %}
 pacman -Ss qt6 # 搜索软件包
-pacman -S mingw-w64-x86-64-qt6 # 安装qt6
-pacman -R mingw-w64-x86-64-qt6 # 删除qt6
+pacman -S mingw-w64-x86_64-qt6 # 安装qt6
+pacman -R mingw-w64-x86_64-qt6 # 删除qt6
 pacman -Q  # 列出已安装的软件包
 {% endhighlight %}
 
@@ -51,8 +51,8 @@ pacman -Q  # 列出已安装的软件包
 
 ![msys2根目录](/assets/imgs/210726-02.png)
 
-在安装时选择对应环境的安装包，然后在相应环境打开的shell中就可以使用。
+在安装时选择对应环境的安装包，然后在相应环境打开的shell中就可以使用。比如你安装了clang64的软件，就只有在打开clang64.exe的终端中才能使用软件，在其它环境中是搜索不到的。
 
-> 注意到上面右键菜单我设置打开的是ming64环境。
-> 在列举软件的使用我安装的也是mingw64的软件包
+> 注意到上面右键打开终端菜单设置中打开的是ming64环境。
+> 在使用软件包工具时我安装的也是mingw64的软件包。
 
