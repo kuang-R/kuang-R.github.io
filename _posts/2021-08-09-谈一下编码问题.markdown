@@ -5,14 +5,14 @@ category: other
 ---
 有时用vim打开一些文件时，会显示乱码。打开一些专辑的cue文件时，foorbar2000也会显示乱码。这都是编码不一样在作怪。 我受编码问题的苦久矣，从日常用msys2环境下的一些不兼容，到串口调试乱码问题，甚至在编程时使用注释和git时，都有乱码的困扰。
 
-编码不统一的弊病是历史遗留问题，最开始使用计算机的家伙们只用英文。而英文总共就26个字符加上一些其他符号，所以所有的可打印字符只需要用8位的char就可以保存全部字符。后来等到使用其它语言的人们也需要打印字符时，8位的char就没办法保存了。在这期间，出现了各种解决方案，这就是编码问题的起源。
+编码不统一的弊病是历史遗留问题，最开始使用计算机的家伙们只用英文。而英文总共就26个字符加上一些其他符号，所以所有的可打印字符只需要用8位的char就可以全部保存。后来等到使用其它语言的人们也需要打印字符时，8位的char就没办法保存了。在这期间，出现了各种解决方案，这就是编码问题的起源。
 
-> 关于编码的问题，Li Yucang的[彻底弄懂Unicode编码](https://liyucang-git.github.io/2019/06/17/%E5%BD%BB%E5%BA%95%E5%BC%84%E6%87%82Unicode%E7%BC%96%E7%A0%81/)已经讲的非常透彻，我就不再详细复述。
+> 关于编码的问题，Li Yucang的 [彻底弄懂Unicode编码](https://liyucang-git.github.io/2019/06/17/%E5%BD%BB%E5%BA%95%E5%BC%84%E6%87%82Unicode%E7%BC%96%E7%A0%81/) 已经讲的非常透彻，我就不再详细复述。
 
-我之前听说utf-8时在Plan 9中发明，然后被各种Unix变体接受，从而广泛使用的。涛叔的[UTF-8往事](https://taoshu.in/utf-8.html)有提到这方面的一些历史。
+我之前听说utf-8时在Plan 9中发明，然后被各种Unix变体接受，从而广泛使用的。涛叔的 [UTF-8往事](https://taoshu.in/utf-8.html) 有提到这方面的一些历史。
 
 ### uchardet
-这是一个从Mozilla项目中整出来的检测编码工具，ByVoid的[博客](https://byvoid.com/zhs/blog/encoding-autodetector-uchardet/)有讲到这个工具诞生的一些事
+这是一个从Mozilla项目中整出来的检测编码工具，ByVoid的 [博客](https://byvoid.com/zhs/blog/encoding-autodetector-uchardet/) 有讲到这个工具诞生的一些事
 
 ### iconv
 通用的编码转换工具
