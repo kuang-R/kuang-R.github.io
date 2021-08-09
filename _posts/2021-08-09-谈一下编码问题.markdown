@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "谈一下各种编码"
-categories: other
+category: other
 ---
 有时用vim打开一些文件时，会显示乱码。打开一些专辑的cue文件时，foorbar2000也会显示乱码。这都是编码不一样在作怪。 我受编码问题的苦久矣，从日常用msys2环境下的一些不兼容，到串口调试乱码问题，甚至在编程时使用注释和git时，都有乱码的困扰。
 
