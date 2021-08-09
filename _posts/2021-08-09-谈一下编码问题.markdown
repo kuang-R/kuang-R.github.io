@@ -20,16 +20,6 @@ categories: other
 ### 实践
 ``` sh
 $ ls
-CDImage.cue  CDImage-utf8.cue
-
-$ iconv.exe -f shift-jis -t gbk CDImage.cue >CDImage-gbk.cue
-
-$ ls
-CDImage.cue  CDImage-gbk.cue  CDImage-utf8.cue
-
-$ rm CDImage-*
-
-$ ls
 CDImage.cue
 
 $ uchardet.exe CDImage.cue
