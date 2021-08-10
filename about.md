@@ -14,5 +14,12 @@ You can find the source code for Jekyll at GitHub:
 [jekyll][jekyll-organization] /
 [jekyll](https://github.com/jekyll/jekyll)
 
+<script src="https://utteranc.es/client.js"
+	repo="[ENTER REPO HERE]"
+	issue-term="pathname"
+	theme="github-light"
+	crossorigin="anonymous"
+	async>
+</script>
 
 [jekyll-organization]: https://github.com/jekyll
