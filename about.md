@@ -14,7 +14,7 @@ You can find the source code for Jekyll at GitHub:
 [jekyll][jekyll-organization] /
 [jekyll](https://github.com/jekyll/jekyll)
 
-{% raw %}
+<div>
 <script src="https://utteranc.es/client.js"
 	repo="kuang-R/kuang-r.github.io"
 	issue-term="pathname"
@@ -22,6 +22,6 @@ You can find the source code for Jekyll at GitHub:
 	crossorigin="anonymous"
 	async>
 </script>
-{% endraw %}
+</div>
 
 [jekyll-organization]: https://github.com/jekyll
