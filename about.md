@@ -16,11 +16,11 @@ You can find the source code for Jekyll at GitHub:
 
 <div>
 <script src="https://utteranc.es/client.js"
-	repo="kuang-R/kuang-r.github.io"
-	issue-term="pathname"
-	theme="github-light"
-	crossorigin="anonymous"
-	async>
+        repo="kuang-R/kuang-r.github.io"
+        issue-term="pathname"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
 </script>
 </div>
 
