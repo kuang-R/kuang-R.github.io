@@ -41,6 +41,61 @@ int main()
 ### GByteArray
 字节数组，是GArray的子集，元素类型固定为Byte，在使用上方便很多。
 
+### GString
+我没在参考手册中的GString对应方法中找到new，所以用了g_malloc创建GString，结果g_print没办法输出了。看来这些数据结构如果没用专门的new创建的话，会产生不可知的效果。
+
+惯例的增删查改操作，值得注意的是明确指定使用utf-8编码，也就是说c源文件必须是utf-8的编码吧。
+
+### GStringChunk
+貌似是用来管理一大堆字符串？insert之后会复制对应内存到这个数据结构里面，然后返回对应的字符串指针。因为是统一分配销毁，所以内存开销会比用GString小很多，但我想象不出来需要用到它的场景。
+
 ### GBytes
 跟HashTable有点关系
 
+### GHashTable
+以Hash表的形式实现的map或者是set，创建的时候需要指定Hash函数和判等函数。因为内部存储的是指针，所以在销毁对象时需要free。当然，也可以在new时指定销毁函数。
+
+``` c
+#include <glib.h>
+#include <string.h>
+guint gs_hash(gconstpointer key)
+{
+	const GString *k = key;
+	return g_str_hash(k->str);
+}
+gboolean eq(gconstpointer a, gconstpointer b)
+{
+	return strcmp(a, b) == 0;
+}
+void gs_free(gpointer data)
+{
+	g_print("destory key\n");
+	g_string_free((GString *)data, TRUE);
+}
+void print_dict(gpointer key, gpointer value, gpointer user_data)
+{
+	const GString *s = key;
+	g_print("\"%s\": %d\n", s->str, *(int *)value);
+}
+int main()
+{
+	/* like set<string, int> */
+	GHashTable *dict = g_hash_table_new_full(gs_hash, eq, gs_free, g_free);
+
+	for (int i = 0; i < 1000; i++) {
+		GString *st = g_string_new("");
+		int *it = g_malloc(sizeof(int));
+
+		g_string_printf(st, "%d", i);
+		*it = i;
+		g_hash_table_insert(dict, st, it);
+	}
+
+	g_hash_table_foreach(dict, print_dict, NULL);
+	g_hash_table_destroy(dict);
+}
+```
+
+这东西写起来有够累人……还有就是，insert会覆盖相同值的key，在这里被覆盖掉的值如果在创建时没有指定DestroyNotify函数，会产生内存泄漏。
+
+### 
