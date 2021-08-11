@@ -37,3 +37,10 @@ int main()
 		g_print("%lf ", p[i]);
 }
 ```
+
+### GByteArray
+字节数组，是GArray的子集，元素类型固定为Byte，在使用上方便很多。
+
+### GBytes
+跟HashTable有点关系
+
