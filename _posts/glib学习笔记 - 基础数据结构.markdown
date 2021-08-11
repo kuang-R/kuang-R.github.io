@@ -2,6 +2,8 @@
 
 前几天glib官方的参考手册移到了gtk的域名下进行管理，整个界面变得现代化了很多。加上之前的gtk官网更新，感觉gtk系列也要慢慢地崛起了。当然，跟qt系的使用率还是没法比。
 
+基础数据结构可以类比c++的std标准库，数据结构只包括glib库的一部分。论使用的便利当然是不如c++的，但加上glib的其它各种组件，用起来还是很不错。
+
 ### GArray
 类似于c++中的vector，但是功能没有那么强大。new的时候需要指定数组元素的大小，但是不需要指定元素个数。也就是说new出来的GArray都是空数组。而且也不能一个一个地添加元素，只能添加数组。内置有排序，二分查找，引用计数，各种删除操作。
 
@@ -33,43 +35,5 @@ int main()
 	/* 1.000000 3.000000 5.000000 6.000000 8.000000 9.000000 */
 	for (int i = 0; i < arr->len; i++)
 		g_print("%lf ", p[i]);
-}
-```
-
-### AsyncQueue
-异步队列，用于多线程操作。这个队列保存的是指针，也就是说要线程自己管理资源的分配和释放。很多方法都有对应的unlocked版本，这是必须在持有队列锁（也就是调用了lock）之后调用的版本，否则可能会产生死锁。
-
-我猜unlocked是为了加快调用速度，避免很多push这种操作对信号量申请过多。
-
-``` c
-#include <glib.h>
-gpointer producer(gpointer data)
-{
-	GAsyncQueue *async_queue = data;
-	for (int i = 0; TRUE; i++) {
-		int *t = g_malloc(sizeof(i));
-		*t = i;
-		g_async_queue_push(async_queue, t);
-	}
-}
-gpointer consumer(gpointer data)
-{
-	GAsyncQueue *async_queue = data;
-	while (TRUE) {
-		int *t = g_async_queue_pop(async_queue);
-		g_print("%d ", *t);
-		g_free(t);
-	}
-}
-int main()
-{
-	GMainLoop *main_loop = g_main_loop_new(NULL, FALSE);
-	GThread *th1, *th2;
-	GAsyncQueue *async_queue = g_async_queue_new();
-
-	th1 = g_thread_new("Producer", producer, async_queue);
-	th2 = g_thread_new("Consumer", consumer, async_queue);
-
-	g_main_loop_run(main_loop);
 }
 ```
