@@ -53,7 +53,7 @@ int main()
 跟HashTable有点关系
 
 ### GHashTable
-以Hash表的形式实现的map或者是set，创建的时候需要指定Hash函数和判等函数。因为内部存储的是指针，所以在销毁对象时需要free。当然，也可以在new时指定销毁函数。
+以Hash表的形式实现的map或者是set，创建的时候需要指定Hash函数和判等函数。因为内部存储的是指针，所以在销毁对象时需要free。当然，也可以在new时指定销毁函数。insert时如果key在表中已存在，只更新value，replace则会更新key和value。
 
 ``` c
 #include <glib.h>
