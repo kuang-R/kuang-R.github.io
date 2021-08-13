@@ -49,9 +49,6 @@ int main()
 ### GStringChunk
 貌似是用来管理一大堆字符串？insert之后会复制对应内存到这个数据结构里面，然后返回对应的字符串指针。因为是统一分配销毁，所以内存开销会比用GString小很多，但我想象不出来需要用到它的场景。
 
-### GBytes
-跟HashTable有点关系
-
 ### GHashTable
 以Hash表的形式实现的map或者是set，创建的时候需要指定Hash函数和判等函数。因为内部存储的是指针，所以在销毁对象时需要free。当然，也可以在new时指定销毁函数。insert时如果key在表中已存在，只更新value，replace则会更新key和value。
 
@@ -98,4 +95,7 @@ int main()
 
 这东西写起来有够累人……还有就是，insert会覆盖相同值的key，在这里被覆盖掉的值如果在创建时没有指定DestroyNotify函数，会产生内存泄漏。
 
-### 
+### Bytes
+不可变的字节序列，主要以引用计数的方式使用。按照官方文档所说，跟GHashTable和GTree能很好地结合使用。简单来说就是写GHashTable不像上面那么费劲了。
+
+
