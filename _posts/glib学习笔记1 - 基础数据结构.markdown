@@ -123,13 +123,25 @@ int main()
 ```
 
 ### GList
-找了一番，竟然没有找到new方法，结果到源码单元测试里看才知道根本不用初始化。没有元素就是直接NULL，也就是说这种链表并没有头结点这种东西。
+双向链表。找了一番，竟然没有找到new方法，结果到源码单元测试里看才知道根本不用初始化。没有元素就是直接NULL，也就是说这种链表并没有头结点这种东西。
 
 ``` c
+#include <glib.h>
+int main(int argc, char **argv) {
+	GList *list = NULL;
+	g_print("len: %d\n", g_list_length(list)); // len: 0
+	list = g_list_append(list, "test");
+	g_print("len: %d\n", g_list_length(list)); // len: 1
+	g_list_free(list);
+}
 
 ```
 
+### GSList
+单向链表，用法同上
+
+
 ## 参考
-[Manage C data using the GLib collections](https://developer.ibm.com/tutorials/l-glib/)，2005年的一篇glib指导，大佬。
+[Manage C data using the GLib collections](https://developer.ibm.com/tutorials/l-glib/)，2005年的一篇glib指导，详尽且全面，真正的大佬。
 
 [GLib – 2.0 - GTK Documentation](https://docs.gtk.org/glib/index.html)
