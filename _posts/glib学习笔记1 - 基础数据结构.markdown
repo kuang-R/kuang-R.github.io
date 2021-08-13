@@ -147,7 +147,7 @@ int main(int argc, char **argv) {
 先进先出队列，没什么特别的。
 
 ### GTree
-额，第一次见有库提供平衡二叉树结构，详细探索一下。
+按照文档描述，是平衡二叉树结构，跟红黑树相比查找效率更高。
 
 ## 参考
 [Manage C data using the GLib collections](https://developer.ibm.com/tutorials/l-glib/)，2005年的一篇glib指导，详尽且全面，真正的大佬。
