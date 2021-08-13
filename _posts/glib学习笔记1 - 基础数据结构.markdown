@@ -96,6 +96,40 @@ int main()
 这东西写起来有够累人……还有就是，insert会覆盖相同值的key，在这里被覆盖掉的值如果在创建时没有指定DestroyNotify函数，会产生内存泄漏。
 
 ### Bytes
-不可变的字节序列，主要以引用计数的方式使用。按照官方文档所说，跟GHashTable和GTree能很好地结合使用。简单来说就是写GHashTable不像上面那么费劲了。看到这里，我认为glib肯定有一种方法能方便地简化这些累人的写法，可能是引用计数或者是其它的什么。
+不可变的字节序列，主要以引用计数的方式使用。按照官方文档所说，用GBytes作为key可以跟GHashTable和GTree很好地结合使用。
 
+看到这里，我认为glib肯定有一种方法能方便地简化这些累人的写法，可能是引用计数或者是其它的什么。看来有需要对glib的内存管理和类型系统做一个概括性的探索。
 
+``` c
+#include <glib.h>
+static int s_i = 100;
+int main()
+{
+	GBytes *gb = g_bytes_new(&s_i, sizeof(int));
+	GBytes *st = g_bytes_new_static(&s_i, sizeof(int));
+
+	g_print("new: %d\n", *(int *)g_bytes_get_data(gb, NULL));
+	g_print("new_static: %d\n", *(int *)g_bytes_get_data(st, NULL));
+
+	s_i = 200;
+	g_print("new: %d\n", *(int *)g_bytes_get_data(gb, NULL));
+	g_print("new_static: %d\n", *(int *)g_bytes_get_data(st, NULL));
+
+	g_bytes_unref(gb);
+	gb = NULL;
+	g_bytes_unref(st);
+	st = NULL;
+}
+```
+
+### GList
+找了一番，竟然没有找到new方法，结果到源码单元测试里看才知道根本不用初始化。没有元素就是直接NULL，也就是说这种链表并没有头结点这种东西。
+
+``` c
+
+```
+
+## 参考
+[Manage C data using the GLib collections](https://developer.ibm.com/tutorials/l-glib/)，2005年的一篇glib指导，大佬。
+
+[GLib – 2.0 - GTK Documentation](https://docs.gtk.org/glib/index.html)
