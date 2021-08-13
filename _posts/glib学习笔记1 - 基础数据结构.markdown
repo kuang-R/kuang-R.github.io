@@ -41,6 +41,9 @@ int main()
 ### GByteArray
 字节数组，是GArray的子集，元素类型固定为Byte，在使用上方便很多。
 
+### GPtrArray
+保存指针的数组，根据new的方法决定free的时候是否把指针指向的内容也给free掉。
+
 ### GString
 我没在参考手册中的GString对应方法中找到new，所以用了g_malloc创建GString，结果g_print没办法输出了。看来这些数据结构如果没用专门的new创建的话，会产生不可知的效果。
 
@@ -96,7 +99,7 @@ int main()
 这东西写起来有够累人……还有就是，insert会覆盖相同值的key，在这里被覆盖掉的值如果在创建时没有指定DestroyNotify函数，会产生内存泄漏。
 
 ### Bytes
-不可变的字节序列，主要以引用计数的方式使用。按照官方文档所说，用GBytes作为key可以跟GHashTable和GTree很好地结合使用。
+不可变的字节序列，主要以引用计数的方式使用。按照官方文档所说，用GBytes作为key可以跟GHashTable和GTree很好地结合使用。有意思的是它有几种不同的new方法。
 
 看到这里，我认为glib肯定有一种方法能方便地简化这些累人的写法，可能是引用计数或者是其它的什么。看来有需要对glib的内存管理和类型系统来一个概括性的探索。
 
@@ -108,12 +111,12 @@ int main()
 	GBytes *gb = g_bytes_new(&s_i, sizeof(int));
 	GBytes *st = g_bytes_new_static(&s_i, sizeof(int));
 
-	g_print("new: %d\n", *(int *)g_bytes_get_data(gb, NULL));
-	g_print("new_static: %d\n", *(int *)g_bytes_get_data(st, NULL));
+	g_print("new: %d\n", *(int *)g_bytes_get_data(gb, NULL)); // new: 100
+	g_print("new_static: %d\n", *(int *)g_bytes_get_data(st, NULL)); // new_static: 100
 
 	s_i = 200;
-	g_print("new: %d\n", *(int *)g_bytes_get_data(gb, NULL));
-	g_print("new_static: %d\n", *(int *)g_bytes_get_data(st, NULL));
+	g_print("new: %d\n", *(int *)g_bytes_get_data(gb, NULL)); // new: 100
+	g_print("new_static: %d\n", *(int *)g_bytes_get_data(st, NULL)); // new_static: 200
 
 	g_bytes_unref(gb);
 	gb = NULL;
@@ -140,6 +143,11 @@ int main(int argc, char **argv) {
 ### GSList
 单向链表，用法同上
 
+### GQueue
+先进先出队列，没什么特别的。
+
+### GTree
+额，第一次见有库提供平衡二叉树结构，详细探索一下。
 
 ## 参考
 [Manage C data using the GLib collections](https://developer.ibm.com/tutorials/l-glib/)，2005年的一篇glib指导，详尽且全面，真正的大佬。
