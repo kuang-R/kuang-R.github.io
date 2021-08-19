@@ -7,13 +7,12 @@ category: web
 
 初始化一个工程后，看到运行环境里有docker。这东西这几年貌似很火，之前在图书馆里有看过相关的书籍，里面写的高深莫测，什么容器，什么集群花里胡哨也没详细看。正好趁现在有兴趣也学一学docker。
 
-## docker desktop
+## 官方教程
 上官网看了下，发现现在docker在windows下推出了desktop这个图形界面用来管理运行中的状态，而且整个界面还设计得很不错，简单易用。下载了安装包，配个版本较新的windows就能直接用。核心是用微软的wsl2跑的，原来微软切换到wsl2还有这个好处，毕竟有些东西只有Linux内核才跑的动啊。
 
-## 官方教程
 打开docker desktop之后，会弹出一个框教新手怎么用的。我点了进去，发现这个教程直接就是一个用docker运行的一个http服务。首先是直接用git image把教程仓库clone下来，然后直接将这个仓库编译成docker的image，再运行这个image，就能直接在浏览器上访问localhost阅读这个教程啦。
 
-这一下子吸引住了我：寥寥几不，就把docker的作用和使用步骤跟教程实紧密结合在了一起，实在是很有意思。所以说，这种新兴的计算机技术或者是语言，看多少书都不如上官网看一遍tutorial然后实操，效果差太多了。一个优秀的项目肯定有优秀的官方教程，如果没有，说明它还不够优秀。
+这一下子吸引住了我：寥寥几步，就把docker的作用和使用步骤跟教程紧密结合在了一起，实在是很有意思。所以说，这种新兴的计算机技术或者是语言，看多少书都不如上官网看一遍tutorial然后实操，效果差太多了。一个优秀的项目肯定有优秀的官方教程，如果没有，说明它还不够优秀。
 
 ## 核心概念
 感觉docker就是个虚拟机，专门设计用于运行服务的。下面以我的理解（仅仅是操作完了官方教程的水平）描述一下一些相关概念。
@@ -42,4 +41,6 @@ container之间用network通信，处于同一个network的运行实例能相互
 像这种CI(Continuous integration)工具，能实现很高的自动化。像是打包发布安装包，运行单元测试之类的机械性工作都能完全自动运行。花在构建和学习自动化工具的时间我认为是非常值得的。CI工具走的比较前的貌似是gitlab，glib库就是很标准的例子，还有就是gtk的官网也是用CI构建的。github算是比较晚的，2018年才推出。
 
 ## 参考
+[Docker Desktop](https://www.docker.com/products/docker-desktop)
+
 [Introduction to GitHub Actions](https://docs.github.com/en/actions/learn-github-actions/introduction-to-github-actions#the-components-of-github-actions)
