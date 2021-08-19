@@ -1,0 +1,45 @@
+---
+layout: post
+title:  "Docker初探"
+category: web
+---
+最近对Web技术提起了一些兴趣，想学学web开发。现在搭建网站据我所知，PHP和java用的最多。但我就是喜欢特立独行，想试试别的东西。发现asp.net貌似不错，我对c#的观感挺好，而且现在.net框架也开源并支持跨平台了。所以就在vs上安装了.net的开发环境，准备学一学。
+
+初始化一个工程后，看到运行环境里有docker。这东西这几年貌似很火，之前在图书馆里有看过相关的书籍，里面写的高深莫测，什么容器，什么集群花里胡哨也没详细看。正好趁现在有兴趣也学一学docker。
+
+## docker desktop
+上官网看了下，发现现在docker在windows下推出了desktop这个图形界面用来管理运行中的状态，而且整个界面还设计得很不错，简单易用。下载了安装包，配个版本较新的windows就能直接用。核心是用微软的wsl2跑的，原来微软切换到wsl2还有这个好处，毕竟有些东西只有Linux内核才跑的动啊。
+
+## 官方教程
+打开docker desktop之后，会弹出一个框教新手怎么用的。我点了进去，发现这个教程直接就是一个用docker运行的一个http服务。首先是直接用git image把教程仓库clone下来，然后直接将这个仓库编译成docker的image，再运行这个image，就能直接在浏览器上访问localhost阅读这个教程啦。
+
+这一下子吸引住了我：寥寥几不，就把docker的作用和使用步骤跟教程实紧密结合在了一起，实在是很有意思。所以说，这种新兴的计算机技术或者是语言，看多少书都不如上官网看一遍tutorial然后实操，效果差太多了。一个优秀的项目肯定有优秀的官方教程，如果没有，说明它还不够优秀。
+
+## 核心概念
+感觉docker就是个虚拟机，专门设计用于运行服务的。下面以我的理解（仅仅是操作完了官方教程的水平）描述一下一些相关概念。
+
+### image
+一个包含了程序和所需依赖的包，用docker构建
+
+### container
+每次run image都会产出一个新的container，用来保存每次运行产生的变化，比如说环境变量，配置文件什么的。
+
+### volumes
+有一些文件要保存在container之外的地方，这样更新image再运行container的时候，中间数据就不会丢失了。这个地方就叫volumes。
+
+### network
+container之间用network通信，处于同一个network的运行实例能相互通讯。
+
+## 应用
+总的来说，感觉这东西适合运行一些不会关闭的软件，比如监听80端口的web服务。也有一些很有意思的应用，比较广泛的应该就是github actions。jekyll就能通过docker来构建和发布GitHub pages。参考helaili写的[jekyll-action](https://github.com/helaili/jekyll-action)
+
+在了解过docker的操作流程和基本概念之后，这东西很容易搞懂。原理就是创建一个ruby的container，在这个环境里运行一个简单的shell脚本。这个脚本的作用是下载仓库->安装jekyll依赖->构建jekyll->发布网站。非常有意思，脚本名字是`entrypoint.sh`，有兴趣的可以看看。
+
+我跟着这个仓库的README试了一下，真的非常实用。再也不用局限于GitHub自动构建的jekyll版本和插件啦，[超爽](https://github.com/kuang-R/jekyll-action-test)！
+
+![自动构建效果图](/assets/imgs/210819-01.png)
+
+像这种CI(Continuous integration)工具，能实现很高的自动化。像是打包发布安装包，运行单元测试之类的机械性工作都能完全自动运行。花在构建和学习自动化工具的时间我认为是非常值得的。CI工具走的比较前的貌似是gitlab，glib库就是很标准的例子，还有就是gtk的官网也是用CI构建的。github算是比较晚的，2018年才推出。
+
+## 参考
+[Introduction to GitHub Actions](https://docs.github.com/en/actions/learn-github-actions/introduction-to-github-actions#the-components-of-github-actions)
