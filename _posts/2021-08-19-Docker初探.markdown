@@ -38,7 +38,7 @@ container之间用network通信，处于同一个network的运行实例能相互
 
 ![自动构建效果图](/assets/imgs/210819-01.png)
 
-像这种CI(Continuous integration)工具，能实现很高的自动化。像是打包发布安装包，运行单元测试之类的机械性工作都能完全自动运行。花在构建和学习自动化工具的时间我认为是非常值得的。CI工具走的比较前的貌似是gitlab，glib库就是很标准的例子，还有就是gtk的官网也是用CI构建的。github算是比较晚的，2018年才推出。
+像这种CI(Continuous integration)工具，能实现很高的自动化。像是打包发布安装包，运行单元测试之类的机械性工作都能完全自动运行。花在构建和学习自动化工具的时间我认为是非常值得的。CI工具走的比较前的貌似是gitlab，[glib库](https://gitlab.gnome.org/GNOME/glib)就是很标准的例子，还有就是[gtk的官网](https://gitlab.gnome.org/Infrastructure/gtk-web)也是用CI构建的。github算是比较晚的，2018年才推出。
 
 ## 参考
 [Docker Desktop](https://www.docker.com/products/docker-desktop)
