@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Docker初探"
+title:  "2021-10-07-DESIR: Decoy-Enhanced Seamless IP Randomization阅读笔记"
 category: paper
 ---
 这边论文的basic idea比较简单，就是放出诱饵和不断改变网络位置（IP地址）来缓解网络侦察(reconnaissance)攻击。我认为它的实验很有意思，本来我以为会在路由器层面进行实现，通过改变IP包的方式对上层透明化。结果后来一看，发现竟然是在一台电脑上搭建虚拟机来模拟全部环境。这就是乞丐版实现吗？不过仔细一想，其实这种实验的可行性高而且也可信，简直就是最好方案啊。
