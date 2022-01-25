@@ -1,0 +1,25 @@
+:CPP: c++
+
+= c++标准库阅读
+
+最近在读侯捷的《std源码剖析》，这本书非常经典，但毕竟是2003年的版次了。在那之后c++经过了{CPP}11这个大版本，不知道标准库还是不是那个样子。
+所以我打算挑一个实现阅读一下，查阅了cppreference后发现gcc的最新版本已经支持到了{CPP}17。{CPP}20似乎又是一个颠覆性的大版本，
+但鉴于目前没有编译器完全支持其特性，所以还是阅读{CPP}17的stl源码，跟原书对照这学一下标准库这个最强的库吧。
+
+== 获取代码
+
+c++的stl库都是以头文件的形式发布，所以基本上只需要找到对应编译好的版本然后下载。就能直接在include里面找到stl库的代码开始看了。
+
+不过我还是试着编译了一下gcc，gcc编译有个注意点就是不能在源代码里创建编译文件夹，要在外面创建然后编译。其他没什么特别值得一提。
+以下是wsl2，ubuntu20的编译大致命令。
+
+[source, bash]
+sudo apt install build-essential manpages-dev software-properties-common gcc g++ make bison binutils gcc-multilib flex
+../gcc/configure --prefix="$(pwd)/install" --enable-languages=c++ --disable-multilib
+
+[source, bash]
+template<typename _Tp, typename _Alloc = std::allocator<_Tp> >
+    class vector : protected _Vector_base<_Tp, _Alloc>
+{
+    ...
+}
