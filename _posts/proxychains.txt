@@ -1,4 +1,6 @@
-export https_proxy=http://127.0.0.1:10809 http_proxy=http://127.0.0.1:10809 all_proxy=socks5://127.0.0.1:10808
+export https_proxy=http://127.0.0.1:10809
+export http_proxy=http://127.0.0.1:10809
+export all_proxy=socks5://127.0.0.1:10808
 
 brew install proxychains-ng
 
